@@ -7,13 +7,17 @@ metadata:
 spec:
   replicas: 2
   selector:
-    matchLabels:
-      stage: prod
+    matchExpressions:
+      - key: stage
+        operator: In
+        values:
+          - prod
+          - staging
   template:
     metadata:
       labels:
-        stage: prod
+        stage: prod  # prod 또는 staging에 따라 변경 가능
     spec:
       containers:
-      - image: nginx
-        name: nginx
+        - image: nginx
+          name: nginx
