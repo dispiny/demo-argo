@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: nginx
   labels:
-    stage: stage
+    stage: staging
 spec:
   replicas: 2
   selector:
     matchLabels:
-      stage: stage
+      stage: staging
   template:
     metadata:
       labels:
-        stage: stage
+        stage: staging
     spec:
       containers:
       - image: nginx
