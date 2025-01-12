@@ -1,3 +1,26 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: nginx
+#   labels:
+#     stage: prod
+# spec:
+#   replicas: 2
+#   selector:
+#     matchExpressions:
+#       - key: stage
+#         operator: In
+#         values:
+#           - prod
+#           - staging
+#   template:
+#     metadata:
+#       labels:
+#         stage: prod  # prod 또는 staging에 따라 변경 가능
+#     spec:
+#       containers:
+#         - image: nginx
+#           name: nginx
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -7,16 +30,12 @@ metadata:
 spec:
   replicas: 2
   selector:
-    matchExpressions:
-      - key: stage
-        operator: In
-        values:
-          - prod
-          - staging
+    matchLabels:
+      stage: prod  # or staging, depending on the cluster
   template:
     metadata:
       labels:
-        stage: prod  # prod 또는 staging에 따라 변경 가능
+        stage: prod  # This label should match the selector
     spec:
       containers:
         - image: nginx
